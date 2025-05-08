@@ -1,0 +1,12 @@
+services:
+  queue-bullmq-redis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: queue-bullmq-redis
+    ports:
+      - '6060:6060'
+    environment:
+      - PORT=6060
+    volumes:
+      - ./src:/app/src:ro
