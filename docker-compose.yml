@@ -5,8 +5,28 @@ services:
       dockerfile: Dockerfile
     container_name: queue-bullmq-redis
     ports:
-      - '6060:6060'
+      - '5050:6060'
     environment:
       - PORT=6060
+      - REDIS_HOST=redis-server
+      - REDIS_PORT=6379
+      - EMAIL_HOST=smtp.ethereal.email
+      - EMAIL_PORT=587
+      - EMAIL_USERNAME=m3ssqx74h6r62aha@ethereal.email
+      - EMAIL_PASSWORD=pxHJrhmmhr1ACSb5Gj
     volumes:
       - ./src:/app/src:ro
+    depends_on:
+      - redis-server
+
+  redis-server:
+    image: redis:latest
+    container_name: redis-server
+    ports:
+      - '6380:6379'
+    volumes:
+      - redis-data:/data
+    restart: always
+
+volumes:
+  redis-data:
